@@ -11,6 +11,7 @@ import java.util.Optional;
 @Service
 public class MusicServiceImpl implements MusicService {
     MusicRepository musicRepository;
+
     @Autowired
     public MusicServiceImpl(MusicRepository musicRepository)
     {
@@ -51,4 +52,11 @@ public class MusicServiceImpl implements MusicService {
     public List<Music> getAllUsers() {
         return musicRepository.findAll();
     }
+
+    @Override
+    public List<Music> queryString(String name) {
+        List<Music> list = musicRepository.getMusicInfoByName(name);
+        return list;
+    }
+
 }

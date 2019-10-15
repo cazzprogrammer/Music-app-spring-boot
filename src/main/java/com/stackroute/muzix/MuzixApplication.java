@@ -10,4 +10,6 @@ public class MuzixApplication {
 		SpringApplication.run(MuzixApplication.class, args);
 	}
 
+
+
 }

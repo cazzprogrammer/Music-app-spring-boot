@@ -71,8 +71,12 @@ public class MusicController {
         }
         return responseEntity;
 
-
     }
 
+    @GetMapping("music/find/{trackName}")
+    public ResponseEntity<?> query(@PathVariable(value = "trackName") String trackName)
+    {
+        return new ResponseEntity<List<Music>>( musicService.queryString(trackName),HttpStatus.OK);
+    }
 
 }

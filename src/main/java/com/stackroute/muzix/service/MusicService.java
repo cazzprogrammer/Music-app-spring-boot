@@ -11,5 +11,7 @@ public interface MusicService {
     public void deleteUser(int trackId);
     public Music findById(int trackId);
     public List<Music> getAllUsers();
+    public List<Music> queryString(String name);
+
 
 }
