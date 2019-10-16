@@ -1,6 +1,8 @@
 package com.stackroute.muzix.controller;
 
 import com.stackroute.muzix.domain.Music;
+import com.stackroute.muzix.exceptions.TrackAlreadyExistsException;
+import com.stackroute.muzix.exceptions.TrackNotFoundException;
 import com.stackroute.muzix.service.MusicService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +39,16 @@ public class MusicController {
         return new ResponseEntity<List<Music>>(musicService.getAllUsers(), HttpStatus.OK);
     }
     @GetMapping("music/{trackId}")
-    public ResponseEntity<?> searchByid(@PathVariable(value = "trackId") int trackId){
-        return new ResponseEntity<Music>(musicService.findById(trackId), HttpStatus.OK);
+    public ResponseEntity<?> searchByid(@PathVariable(value = "trackId") int trackId)
+    {   ResponseEntity responseEntity;
+        try{
+            responseEntity = new ResponseEntity<Music>(musicService.findById(trackId), HttpStatus.OK);
+        }
+        catch (TrackNotFoundException ex)
+        {
+            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+        }
+        return responseEntity;
     }
 
     @PutMapping("music")
@@ -49,7 +59,7 @@ public class MusicController {
             musicService.updateUser(user);
             responseEntity = new ResponseEntity<String>("updated successfull", HttpStatus.CREATED);
         }
-        catch (Exception ex)
+        catch (TrackAlreadyExistsException ex)
         {
             responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
@@ -65,7 +75,7 @@ public class MusicController {
             musicService.deleteUser(trackId);
             responseEntity = new ResponseEntity<String>("deleted successfull", HttpStatus.CREATED);
         }
-        catch (Exception ex)
+        catch (TrackNotFoundException ex)
         {
             responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
@@ -76,7 +86,15 @@ public class MusicController {
     @GetMapping("music/find/{trackName}")
     public ResponseEntity<?> query(@PathVariable(value = "trackName") String trackName)
     {
-        return new ResponseEntity<List<Music>>( musicService.queryString(trackName),HttpStatus.OK);
+        ResponseEntity responseEntity ;
+        try{
+            responseEntity = new ResponseEntity<List<Music>>( musicService.queryString(trackName),HttpStatus.OK);
+        }
+        catch (TrackNotFoundException ex)
+        {
+            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+        }
+        return responseEntity;
     }
 
 }
