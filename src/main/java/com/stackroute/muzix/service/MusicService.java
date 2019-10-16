@@ -15,5 +15,9 @@ public interface MusicService {
     public List<Music> getAllUsers();
     public List<Music> queryString(String name) throws TrackNotFoundException;
 
+    public Music saveUserAuto(Music music);
+    public Music saveUserListen(Music music );
+
+
 
 }

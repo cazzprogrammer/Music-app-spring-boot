@@ -49,6 +49,7 @@ public class MusicServiceImpl implements MusicService {
         }
         Optional<Music> user1 = musicRepository.findById(trackId);
         Music user2 = user1.get();
+
         musicRepository.delete(user2);
     }
 
@@ -80,6 +81,19 @@ public class MusicServiceImpl implements MusicService {
             throw new TrackNotFoundException("No tracks found with name " + name);
         }
         return list;
+    }
+
+    @Override
+    public Music saveUserAuto(Music music) {
+
+        Music music1 = musicRepository.save(music);
+        return music1;
+    }
+
+    @Override
+    public Music saveUserListen(Music music) {
+        Music music1 = musicRepository.save(music);
+        return music1;
     }
 
 }
