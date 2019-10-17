@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-
+@Profile("hello")
 public class DummyMusicSerciceImpl implements MusicService{
     MusicRepository musicRepository;
 
