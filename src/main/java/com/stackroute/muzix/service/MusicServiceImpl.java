@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Primary
 public class MusicServiceImpl implements MusicService {
     MusicRepository musicRepository;
 

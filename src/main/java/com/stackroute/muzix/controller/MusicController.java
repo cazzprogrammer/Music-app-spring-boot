@@ -14,11 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/v2")
-@Qualifier("musicServiceImpl")
 public class MusicController {
-
+    @Qualifier("musicServiceImpl")
     MusicService musicService;
-    public MusicController( MusicService musicService)
+
+    public MusicController(@Qualifier("musicServiceImpl")MusicService musicService)
     {
         this.musicService=musicService;
 
