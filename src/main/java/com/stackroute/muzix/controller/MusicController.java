@@ -4,6 +4,8 @@ import com.stackroute.muzix.domain.Music;
 import com.stackroute.muzix.exceptions.TrackAlreadyExistsException;
 import com.stackroute.muzix.exceptions.TrackNotFoundException;
 import com.stackroute.muzix.service.MusicService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/v2")
+@Qualifier("musicServiceImpl")
 public class MusicController {
 
     MusicService musicService;
-
-    public MusicController(MusicService musicService)
+    public MusicController( MusicService musicService)
     {
         this.musicService=musicService;
 
