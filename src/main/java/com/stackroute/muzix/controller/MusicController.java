@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "api/v2")
 public class MusicController {
+
     MusicService musicService;
 
     public MusicController(MusicService musicService)
