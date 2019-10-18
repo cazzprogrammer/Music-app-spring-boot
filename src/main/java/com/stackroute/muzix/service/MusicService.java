@@ -10,7 +10,7 @@ public interface MusicService {
 
     public Music saveUser(Music user) throws TrackAlreadyExistsException;
     public Music updateUser(Music user) throws TrackNotFoundException;
-    public void deleteUser(int trackId) throws TrackNotFoundException;
+    public Music deleteUser(int trackId) throws TrackNotFoundException;
     public Music findById(int trackId) throws TrackNotFoundException;
     public List<Music> getAllUsers();
     public List<Music> queryString(String name) throws TrackNotFoundException;

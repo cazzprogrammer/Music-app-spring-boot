@@ -77,7 +77,7 @@ public class MusicController {
         ResponseEntity responseEntity ;
         try {
             musicService.deleteUser(trackId);
-            responseEntity = new ResponseEntity<String>("deleted successfull", HttpStatus.CREATED);
+            responseEntity = new ResponseEntity<String>("deleted successful", HttpStatus.ACCEPTED);
         }
         catch (TrackNotFoundException ex)
         {

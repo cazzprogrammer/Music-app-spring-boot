@@ -97,6 +97,25 @@ public class MusicControllerTest {
                 .andDo(MockMvcResultHandlers.print());
 
     }
+    @Test
+    public void deleteUser() throws Exception {
+        when(musicService.deleteUser(list.get(0).getTrackId())).thenReturn(music);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v2/music/"+list.get(0).getTrackId())
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(music)))
+                .andExpect(MockMvcResultMatchers.status().isAccepted())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void deleteUserFailure() throws Exception {
+        when(musicService.deleteUser(list.get(0).getTrackId())).thenThrow(TrackNotFoundException.class);
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v2/music/"+list.get(0).getTrackId())
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(music)))
+                .andExpect(MockMvcResultMatchers.status().isConflict())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+
 
 
     private static String asJsonString(final Object obj)

@@ -42,11 +42,12 @@ public class DummyMusicSerciceImpl implements MusicService{
     }
 
     @Override
-    public void deleteUser(int trackId) throws TrackNotFoundException {
+    public Music deleteUser(int trackId) throws TrackNotFoundException {
         Optional<Music> user1 = musicRepository.findById(trackId);
         Music user2 = user1.get();
 
         musicRepository.delete(user2);
+        return user2;
     }
 
     @Override
