@@ -31,7 +31,7 @@ public class DummyMusicSerciceImpl implements MusicService{
     }
 
     @Override
-    public Music updateUser(Music user) throws TrackAlreadyExistsException {
+    public Music updateUser(Music user) throws TrackNotFoundException {
         Optional<Music> user1 = musicRepository.findById(user.getTrackId());
 
         Music user2 = user1.get();

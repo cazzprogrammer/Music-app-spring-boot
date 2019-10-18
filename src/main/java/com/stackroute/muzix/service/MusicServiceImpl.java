@@ -24,16 +24,20 @@ public class MusicServiceImpl implements MusicService {
         this.musicRepository = musicRepository;
     }
     @Override
-    public Music saveUser(Music user) {
+    public Music saveUser(Music user) throws TrackAlreadyExistsException {
+        if(musicRepository.existsById(user.getTrackId()))
+        {
+            throw new TrackAlreadyExistsException("Track Already exists with Id "+ user.getTrackId());
+        }
         Music savedUser = musicRepository.save(user);
         return savedUser;
     }
 
     @Override
-    public Music updateUser(Music user) throws TrackAlreadyExistsException {
-        if(musicRepository.existsById(user.getTrackId()))
+    public Music updateUser(Music user) throws TrackNotFoundException {
+        if(!musicRepository.existsById(user.getTrackId()))
         {
-            throw new TrackAlreadyExistsException("Track Already exists with Id "+ user.getTrackId());
+            throw new TrackNotFoundException("Track doesnot exists"+ user.getTrackId());
         }
         Optional<Music> user1 = musicRepository.findById(user.getTrackId());
 

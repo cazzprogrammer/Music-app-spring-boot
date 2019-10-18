@@ -32,7 +32,7 @@ public class MusicController {
             musicService.saveUser(music);
             responseEntity = new ResponseEntity<String>("Successfull created", HttpStatus.CREATED);
         }
-        catch (Exception ex)
+        catch (TrackAlreadyExistsException ex)
         {
             responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
@@ -63,7 +63,7 @@ public class MusicController {
             musicService.updateUser(user);
             responseEntity = new ResponseEntity<String>("updated successfull", HttpStatus.CREATED);
         }
-        catch (TrackAlreadyExistsException ex)
+        catch (TrackNotFoundException ex)
         {
             responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
