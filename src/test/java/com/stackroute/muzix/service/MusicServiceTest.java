@@ -57,15 +57,6 @@ public class MusicServiceTest {
 
     }
 
-    @Test(expected = TrackAlreadyExistsException.class)
-    public void saveUserTestFailure() throws TrackAlreadyExistsException {
-        when(musicRepository.save((Music) any())).thenReturn(null);
-        Music savedUser = musicService.saveUser(music);
-        System.out.println("savedUser" + savedUser);
-        Assert.assertEquals(music,savedUser);
-        
-    }
-
     @Test
     public void getAllUser(){
 
